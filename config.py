@@ -4,7 +4,7 @@ CHAR_ARR = array(list(" .'`-^~:;=!+$*#@"))
 LUMINANCE_STEP: int = 255 // (CHAR_ARR.size - 1)
 
 # output video
-OUTPUT_FPS: None | int = None # None means use original
+OUTPUT_FPS: None | int = None # 0 | None means use original
 MAX_SECS: None | int = None # input video length
 
 MAX_PX: int = 100 # for width and height compression

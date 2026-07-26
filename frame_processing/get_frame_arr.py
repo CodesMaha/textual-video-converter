@@ -56,5 +56,8 @@ class InputVideo:
 
         return frame
 
+    def is_opened(self):
+        return self.video.isOpened()
+
     def release(self):
         self.video.release()
