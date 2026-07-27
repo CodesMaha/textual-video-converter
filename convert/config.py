@@ -13,10 +13,6 @@ FOURCC_CODEC: str = "mp4v"
 FILE_EXTENSION: str = ".mp4"
 FN_ADDITION: str = "_textual"
 
-FILE_TYPES: tuple[tuple[str]] = (
-    ("all", "*.*"), ("gif", "*.gif"), ("mp4", "*.mp4")
-)
-
 # square text
 FONT_NAME: str = "monospace"
 FONT_SIZE: int = 16

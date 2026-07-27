@@ -2,26 +2,32 @@
 convert coloured videos to those made up of symbols. 
 
 # usage
+First, `cd` to [local root directory](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository#cloning-a-repository). 
+
+Then, use `python -m convert -h` to check usage.
+
 ![one hundred and twenty-five high-contrast frames.](example.gif)
 
 (`example.gif` can be used for testing.)
 
-### running `convert.py` through shell…
----
-using the `local` subcommand:
+## running subcommands through shell
+`local` subcommand:
 * provide filepath to input video;
 * optionally enter filepath to output video.
 ```
-python convert.py local [-o OUTPUT_FILEPATH] INPUT_FILEPATH
+python -m convert local [-o OUTPUT_FILEPATH] INPUT_FILEPATH
 ```
-using the `youtube` subcommand:
-+ provide link to desired video to be downloaded;
+`youtube` subcommand:
++ provide link to desired video for downloaded;
 + optionally pass in time arguments in seconds for trimming after download.
 ```
-python convert.py youtube [-i INITIAL_TIMESTAMP] [-d DURATION] INPUT_URL
+python -m convert youtube [-i INITIAL_TIMESTAMP] [-d DURATION] INPUT_URL
 ```
 
 ## dependencies
+* `opencv-python` is required for putting together videos.
+* `pygame-ce` is required for drawing on videos.
+* `ytdlp` is required for downloading videos.
 ```
 ├── opencv-python v5.0.0.93
 │   └── numpy v2.5.1

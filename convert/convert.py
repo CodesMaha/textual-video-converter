@@ -1,13 +1,13 @@
-import config as con
+from . import config as con
 
 import cv2
 import pygame
 
-from frame_processing.get_file_info import reformat_filename
-from frame_processing.get_frame_arr import InputVideo
+from .frame_processing.get_file_info import reformat_filename
+from .frame_processing.get_frame_arr import InputVideo
 
-from frame_drawing.font_blitting import FontRenderer
-from frame_drawing.arr_conversion import surf_to_arr
+from .frame_drawing.font_blitting import FontRenderer
+from .frame_drawing.arr_conversion import surf_to_arr
 
 pygame.font.init()
 

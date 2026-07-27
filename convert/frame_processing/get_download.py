@@ -59,3 +59,6 @@ def trim_clip(fn: str, initial:float=0.0, duration:float=0.0) -> None:
     out.release()
 
     replace(new_fn, fn)
+
+if __name__ == "__main__":
+    download_clip("https://youtu.be/6AiTpL_PywQ")

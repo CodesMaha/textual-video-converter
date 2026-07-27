@@ -4,8 +4,8 @@ then e.g. python convert.py local example.gif
 """
 
 import argparse 
-from main import convert
-from frame_processing.get_download import *
+from .convert import convert
+from .frame_processing.get_download import *
 
 parser = argparse.ArgumentParser(
     description="turn video colour into symbols"
