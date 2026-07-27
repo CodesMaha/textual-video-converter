@@ -1,18 +1,5 @@
 """ determine data for video such as filename """
 
-from tkinter.filedialog import askopenfilename
-
-def get_filename(file_types: tuple[tuple[str]]) -> str:
-    """ use tk for file directory selection """
-    fn: str = askopenfilename(
-        title="select video", initialdir=".", 
-        filetypes=file_types
-    )
-    if not fn:
-        raise ValueError("no input video selected for conversion")
-
-    return fn
-
 def reformat_filename(
         filename: str, to_insert: str, f_extension: str
     ) -> str:
