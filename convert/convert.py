@@ -13,8 +13,7 @@ pygame.font.init()
 
 def match_char(frame_luminance_arr):
     """ replace frame luminance values with symbols """
-    frame_luminance_arr //= con.LUMINANCE_STEP
-    return con.CHAR_ARR[frame_luminance_arr]
+    return con.CHAR_ARR[frame_luminance_arr // con.LUMINANCE_STEP]
 
 def print_progress(frame_no: int, max_frame_count: int) -> None:
     if (frame_no % max(1, (max_frame_count // 4))) == 0:

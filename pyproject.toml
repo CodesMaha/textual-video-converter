@@ -9,4 +9,5 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/CodesMaha/textual-video-converter.git"
+repository = "https://github.com/CodesMaha/textual-video-converter"
+"codeberg mirror" = "https://codeberg.org/MahaCodes/textual-video-converter"

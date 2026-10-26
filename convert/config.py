@@ -1,7 +1,7 @@
 from numpy import array
 
-CHAR_ARR = array(list(" .'`-^~:;=!+$*#@"))
-LUMINANCE_STEP: int = 255 // (CHAR_ARR.size - 1)
+CHAR_ARR = array(list(" #@")) # " .'`-^~:;=!+$*#@"
+LUMINANCE_STEP: int = 256 // CHAR_ARR.size
 
 # output video
 OUTPUT_FPS: None | int = None # 0 | None means use original

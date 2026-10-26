@@ -1,6 +1,6 @@
 """ 
 run via command line, so first cd to dir.
-then e.g. python convert.py local example.gif
+then e.g. python -m convert local example.gif
 """
 
 import argparse 

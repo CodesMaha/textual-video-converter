@@ -1,4 +1,4 @@
-# text video converter
+# textual video converter
 convert coloured videos to those made up of symbols. 
 
 # usage
@@ -27,7 +27,7 @@ python -m convert youtube [-i INITIAL_TIMESTAMP] [-d DURATION] INPUT_URL
 ## dependencies
 * `opencv-python` is required for putting together videos.
 * `pygame-ce` is required for drawing on videos.
-* `ytdlp` is required for downloading videos.
+* `yt-dlp` is required for downloading videos.
 ```
 ├── opencv-python v5.0.0.93
 │   └── numpy v2.5.1
