@@ -1,10 +1,9 @@
 when:
-  - event: [push, pull_request]
+  - event: [push, pull_request, manual]
     branch: main
 
 steps:
-  - name: pre-commit
-    image: python:3.13
-    commands:
-      - pip install pre-commit
-      - pre-commit run --all-files
+  pre-commit:
+    image: codeberg.org/sp1thas/woodpecker-ci-pre-commit-runner
+    settings:
+      args: "--all-files"
