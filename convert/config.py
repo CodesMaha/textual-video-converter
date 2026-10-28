@@ -1,7 +1,6 @@
-from numpy import array
+from .frame_drawing.arr_manip import get_char_lookup
 
-CHAR_ARR = array(list(" #@")) # " .'`-^~:;=!+$*#@"
-LUMINANCE_STEP: int = 256 // CHAR_ARR.size
+CHAR_ARR = get_char_lookup(" #@") # " .'`-^~:;=!+$*#@"
 
 # output video
 OUTPUT_FPS: None | int = None # 0 | None means use original

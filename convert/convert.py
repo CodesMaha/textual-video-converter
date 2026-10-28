@@ -3,17 +3,20 @@ from . import config as con
 import cv2
 import pygame
 
+from numpy import uint8, str_
+from numpy.typing import NDArray
+
 from .frame_processing.get_file_info import reformat_filename
 from .frame_processing.get_frame_arr import InputVideo
 
 from .frame_drawing.font_blitting import FontRenderer
-from .frame_drawing.arr_conversion import surf_to_arr
+from .frame_drawing.arr_manip import surf_to_arr
 
 pygame.font.init()
 
-def match_char(frame_luminance_arr):
+def match_char(frame_luminance_arr: NDArray[uint8]) -> NDArray[str_]:
     """ replace frame luminance values with symbols """
-    return con.CHAR_ARR[frame_luminance_arr // con.LUMINANCE_STEP]
+    return con.CHAR_ARR[frame_luminance_arr]
 
 def print_progress(frame_no: int, max_frame_count: int) -> None:
     if (frame_no % max(1, (max_frame_count // 4))) == 0:
@@ -27,7 +30,7 @@ def convert(
     if not inp.is_opened():
         raise OSError(
             "could not open input file. "
-            f"possible invalid directory: {fn}"
+            f"possible invalid directory: {inp_fn}"
         )
     print("\ninput file opened successfully")
 
