@@ -21,7 +21,7 @@ python -m convert local [-o OUTPUT_FILEPATH] INPUT_FILEPATH
 + provide link to desired video for downloaded;
 + optionally pass in time arguments in seconds for trimming after download.
 ```
-python -m convert youtube [-i INITIAL_TIMESTAMP] [-d DURATION] INPUT_URL
+python -m convert youtube [-o OUTPUT_FILEPATH] INPUT_URL
 ```
 
 ## dependencies

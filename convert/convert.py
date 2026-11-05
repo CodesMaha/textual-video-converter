@@ -25,6 +25,7 @@ def print_progress(frame_no: int, max_frame_count: int) -> None:
 def convert(
         inp_fn:str|None=None, out_fn:str|None=None,
     ):
+    print("\nattempting to open file and count number of available frames")
     inp = InputVideo(inp_fn, con.MAX_PX)
 
     if not inp.is_opened():
@@ -42,7 +43,7 @@ def convert(
     fn = out_fn or reformat_filename(inp_fn, con.FN_ADDITION, con.FILE_EXTENSION)
     out = cv2.VideoWriter(
         fn, cv2.VideoWriter_fourcc(*con.FOURCC_CODEC), 
-        con.OUTPUT_FPS or inp.fps, frame_surf.size
+        con.OUTPUT_FPS or inp.video.get(cv2.CAP_PROP_FPS), frame_surf.size
     )
 
     if not out.isOpened():
@@ -53,22 +54,14 @@ def convert(
         )
     print("output file initialized successfully")
 
-    seconds = inp.time
-    if (con.MAX_SECS) and (con.MAX_SECS < inp.time):
-        seconds = con.MAX_SECS
-
-    frame_count: int = int(seconds * inp.fps)
-    print(
-        f"\nprocessing {frame_count} frames where fps is "
-        f"{inp.fps} and total seconds is {seconds}"
-    )
-    for frame_no in range(frame_count):
+    print(f"\nprocessing {inp.frame_no} frames")
+    for frame_no in range(inp.frame_no):
         frame = inp.read_frame_arr()
         frame = match_char(frame)
         frame_surf.fill(con.BG_COL)
         render.draw_lines(frame_surf, frame)
         frame = surf_to_arr(frame_surf)
-        print_progress(frame_no, frame_count)
+        print_progress(frame_no, inp.frame_no)
         out.write(frame)
 
     print("\n\nsaving output and terminating")
