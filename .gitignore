@@ -1,4 +1,6 @@
-*.mp4
+# generated files
+from_youtube*
+*_textual*
 
 .venv/
 __pycache__/

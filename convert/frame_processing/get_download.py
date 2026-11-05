@@ -3,17 +3,16 @@ import cv2
 
 from os import replace
 
-def download_clip(url:str) -> str:
-    """ download .mp4 clip to fn then return that fn. verbose=True """
-    fn = "from_youtube.mp4"
+def download_clip(url: str) -> str:
+    """ download .mkv clip to fn then return that fn. verbose=True """
 
     yt_opts = {
         "verbose": True, "overwrites": True,
-        "outtmpl": "from_youtube.mp4"
+        "outtmpl": "from_youtube.%(ext)s"
     }
-
     with yt_dlp.YoutubeDL(yt_opts) as ydl:
-        ydl.download(url)
+        info = ydl.extract_info(url, download=True)
+        fn = ydl.prepare_filename(info)
 
     return fn
 
