@@ -49,3 +49,6 @@ due to the nature of how videos are encoded through `opencv-python`, the output 
 
 # config
 there are certain limitations and other values set, but they are mostly arbitrary. for example, there is an option to process less symbols or pixels per frame, but it can be increased for clarity or further decreased for processing speed.
+
+# license
+read full text of gplv3 [here](./COPYING)
