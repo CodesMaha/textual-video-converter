@@ -19,9 +19,22 @@ parser.add_argument(
         "as the input file"
     )
 )
+parser.add_argument(
+    "-i", "--initial", type=float, default=0,
+    help=(
+        "initial timestamp in seconds to process "
+        "frames from. default is start or second zero"
+    )
+); parser.add_argument(
+    "-d", "--duration", type=float, default=0,
+    help=(
+        "duration of output video unless config " 
+        "concedes it. default is end or value zero"
+    )
+)
 
 
-# python -m convert youtube https://youtu.be/DzrwK8uDiiE
+# python -m convert -i 26.5 -d 4 youtube https://youtu.be/DzrwK8uDiiE
 subparsers = parser.add_subparsers(dest="subcommand")
 
 local_convert = subparsers.add_parser("local")
@@ -45,4 +58,4 @@ elif args.subcommand == "youtube":
     inp_fn = download_clip(args.url)
 out_fn = args.output
 
-convert(inp_fn, out_fn)
+convert(inp_fn, out_fn, args.initial, args.initial + args.duration)

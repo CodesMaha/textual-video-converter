@@ -2,9 +2,9 @@
 convert coloured videos to those made up of symbols. 
 
 # usage
-First, `cd` to [local root directory](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository#cloning-a-repository). 
+first, `cd` to [local root directory](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository#cloning-a-repository).
 
-Then, use `python -m convert -h` to check usage.
+then, use `python -m convert -h` to check usage.
 
 ![one hundred and twenty-five high-contrast frames.](example.gif)
 
@@ -12,16 +12,14 @@ Then, use `python -m convert -h` to check usage.
 
 ## running subcommands through shell
 `local` subcommand:
-* provide filepath to input video;
-* optionally enter filepath to output video.
+* provide filepath to input video.
 ```
-python -m convert local [-o OUTPUT_FILEPATH] INPUT_FILEPATH
+python -m convert [-o OUTPUT_FILEPATH] [-i INITIAL_TIMESTAMP] [-d DURATION] local INPUT_FILEPATH
 ```
 `youtube` subcommand:
-+ provide link to desired video for downloaded;
-+ optionally pass in time arguments in seconds for trimming after download.
++ provide link to desired video for downloaded.
 ```
-python -m convert youtube [-o OUTPUT_FILEPATH] INPUT_URL
+python -m convert [-o OUTPUT_FILEPATH] [-i INITIAL_TIMESTAMP] [-d DURATION] youtube INPUT_URL
 ```
 
 ## dependencies
@@ -39,7 +37,7 @@ python -m convert youtube [-o OUTPUT_FILEPATH] INPUT_URL
 
 **overwriting**:
 
-files are overwritten. for example, if there is already an `example_textual.mp4` file present, then it will be overwritten when processing `example.gif` again. this can be avoided by renaming the file manually or providing a unique output filepath
+files are overwritten. for example, if there is already an `example_textual.mp4` file present, then it will be overwritten when processing `example.gif` again. this can be avoided by renaming the file manually or providing a unique output filepath.
 
 ---
 
@@ -51,4 +49,4 @@ due to the nature of how videos are encoded through `opencv-python`, the output 
 there are certain limitations and other values set, but they are mostly arbitrary. for example, there is an option to process less symbols or pixels per frame, but it can be increased for clarity or further decreased for processing speed.
 
 # license
-read full text of gplv3 [here](./COPYING)
+read full text of gplv3 [here](./COPYING).
