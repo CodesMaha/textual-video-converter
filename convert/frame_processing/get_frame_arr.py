@@ -49,20 +49,17 @@ class InputVideo:
             return frame_count, duration
         
         while True:
-            duration = copy.get(cv2.CAP_PROP_POS_MSEC)
             is_success, _ = copy.read()
             if not is_success: break
             frame_count += 1
+            duration = copy.get(cv2.CAP_PROP_POS_MSEC)
         copy.release()
-
+        
         return frame_count, duration / 1000
 
     def read_frame_arr(self):
         """ return resized luminosity arr """
-        is_success, frame = self.video.read()
-
-        if not is_success:
-            raise ValueError("could not successfully read frame")
+        _, frame = self.video.read()
 
         frame = cv2.cvtColor(
             cv2.resize(frame, self._frame_dim),
@@ -73,6 +70,9 @@ class InputVideo:
 
     def is_opened(self):
         return self.video.isOpened()
+    
+    def seek(self, frame_no: int) -> bool:
+        return self.video.set(cv2.CAP_PROP_POS_FRAMES, frame_no)
 
     def release(self):
         self.video.release()

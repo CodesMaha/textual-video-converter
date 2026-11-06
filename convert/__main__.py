@@ -5,7 +5,7 @@ then e.g. python -m convert local example.gif
 
 import argparse 
 from .convert import convert
-from .frame_processing.get_download import *
+from .frame_processing.get_download import download_clip
 
 parser = argparse.ArgumentParser(
     description="turn video colour into symbols"
@@ -57,5 +57,6 @@ if args.subcommand == "local":
 elif args.subcommand == "youtube":
     inp_fn = download_clip(args.url)
 out_fn = args.output
+stop_time = args.initial + args.duration if args.duration else 0
 
-convert(inp_fn, out_fn, args.initial, args.initial + args.duration)
+convert(inp_fn, out_fn, args.initial, stop_time)

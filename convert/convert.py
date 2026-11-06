@@ -77,10 +77,11 @@ def convert(
 
     start_frame, stop_frame = get_frame_range(
         start_time, stop_time, inp.frame_count, inp.fps
-    ); print(
+    ); inp.seek(start_frame)
+    print(
         f"\nprocessing {stop_frame - start_frame} frames where "
         f"fps is {inp.fps:.2f} and duration "
-        f"is {stop_frame / inp.fps:.2f} sec"
+        f"is {(stop_frame - start_frame) / inp.fps:.2f} sec"
     )
 
     for frame_no in range(start_frame, stop_frame):
