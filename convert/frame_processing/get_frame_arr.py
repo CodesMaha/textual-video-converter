@@ -7,7 +7,7 @@ class InputVideo:
     def __init__(self, fn: str, max_px: int):
         self.video = cv2.VideoCapture(fn)
         # not all codecs offer such metadata
-        self._frame_no = self.get_frame_no(fn)
+        self._frame_count, self._dur = self.get_metadata(fn)
 
         self._frame_dim: tuple[int, int] = InputVideo.get_dimensions(
             self.video.get(cv2.CAP_PROP_FRAME_WIDTH),
@@ -16,7 +16,11 @@ class InputVideo:
         ) # width, height
 
     @property
-    def frame_no(self): return self._frame_no
+    def frame_count(self): return self._frame_count
+    @property
+    def dur(self): return self._dur
+    @property
+    def fps(self): return self.frame_count / self.dur
     
     @property
     def width(self): return self._frame_dim[0]
@@ -35,19 +39,23 @@ class InputVideo:
             return int((max_px / h) * w), max_px
 
     @staticmethod
-    def get_frame_no(fn: str):
-        """ read until failure. one-indexed """
-        frame_no: int = 0
+    def get_metadata(fn: str) -> tuple[int, float]:
+        """ read until failure, and increment data.
+        returns frame count, duration (in secs)
+        """
+        frame_count: int = 0; duration: float = 0.0
         copy = cv2.VideoCapture(fn)
         if not copy.isOpened():
-            return frame_no
+            return frame_count, duration
         
         while True:
+            duration = copy.get(cv2.CAP_PROP_POS_MSEC)
             is_success, _ = copy.read()
             if not is_success: break
-            frame_no += 1
+            frame_count += 1
+        copy.release()
 
-        return frame_no
+        return frame_count, duration / 1000
 
     def read_frame_arr(self):
         """ return resized luminosity arr """

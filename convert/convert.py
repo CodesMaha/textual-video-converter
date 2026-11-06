@@ -6,13 +6,16 @@ import pygame
 from numpy import uint8, str_
 from numpy.typing import NDArray
 
-from .frame_processing.get_file_info import reformat_filename
 from .frame_processing.get_frame_arr import InputVideo
 
 from .frame_drawing.font_blitting import FontRenderer
 from .frame_drawing.arr_manip import surf_to_arr
 
 pygame.font.init()
+
+def reformat_filename(fn: str, to_insert: str, f_ext: str) -> str:
+    """ take filename and add to_insert before the f_ext """
+    return "".join((fn.rsplit(".", 1)[0], to_insert, f_ext))
 
 def match_char(frame_luminance_arr: NDArray[uint8]) -> NDArray[str_]:
     """ replace frame luminance values with symbols """
@@ -43,7 +46,7 @@ def convert(
     fn = out_fn or reformat_filename(inp_fn, con.FN_ADDITION, con.FILE_EXTENSION)
     out = cv2.VideoWriter(
         fn, cv2.VideoWriter_fourcc(*con.FOURCC_CODEC), 
-        con.OUTPUT_FPS or inp.video.get(cv2.CAP_PROP_FPS), frame_surf.size
+        con.OUTPUT_FPS or inp.fps, frame_surf.size
     )
 
     if not out.isOpened():
@@ -54,14 +57,24 @@ def convert(
         )
     print("output file initialized successfully")
 
-    print(f"\nprocessing {inp.frame_no} frames")
-    for frame_no in range(inp.frame_no):
+    frame_count: int = inp.frame_count
+    if con.MAX_SECS:
+        frame_count = min(frame_count, int(con.MAX_SECS * inp.fps))
+    if con.MAX_FRAMES:
+        frame_count = min(frame_count, con.MAX_FRAMES)
+
+    print(
+        f"\nprocessing {frame_count} frames where "
+        f"fps is {inp.fps:.2f} and duration "
+        f"is {frame_count / inp.fps:.2f} sec"
+    )
+    for frame_no in range(frame_count):
         frame = inp.read_frame_arr()
         frame = match_char(frame)
         frame_surf.fill(con.BG_COL)
         render.draw_lines(frame_surf, frame)
         frame = surf_to_arr(frame_surf)
-        print_progress(frame_no, inp.frame_no)
+        print_progress(frame_no, frame_count)
         out.write(frame)
 
     print("\n\nsaving output and terminating")

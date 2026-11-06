@@ -3,9 +3,8 @@ from .frame_drawing.arr_manip import get_char_lookup
 CHAR_ARR = get_char_lookup(" #@") # " .'`-^~:;=!+$*#@"
 
 # output video
-# 0 | None means use original, but that might
-# be bugged if no value is associated with file
-OUTPUT_FPS: None | int = 30 # 0 | None means use original
+OUTPUT_FPS: None | int = None # 0 | None means use original
+MAX_SECS, MAX_FRAMES = None, None
 
 MAX_PX: int = 100 # for width and height compression
 
